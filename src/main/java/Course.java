@@ -20,6 +20,13 @@ public class Course {
         this.teacher = teacher;
     }
 
+    public Course(Course c) {
+        this.name = c.name;
+        this.block = c.block;
+        this.lunch = c.lunch;
+        this.teacher = c.teacher;
+    }
+
     public int getSize() {
         return size;
     }

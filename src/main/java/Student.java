@@ -74,4 +74,47 @@ public class Student {
     private double gpa;
     private int year;
     private ArrayList<Course> necessaryCourses;
+    private ArrayList<Course> courses;
+
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(ArrayList<Course> courses) {
+        this.courses = courses;
+    }
+
+    public double checkScore(ArrayList<Course> courses) {
+        ArrayList<Course> preferredCoursesWithBlocks = new ArrayList<Course>();
+
+        for (Course c : courses) {
+            for (Course pc : this.getPreferredCourses()) {
+                if (c.getName().equals(pc.getName())) {
+                    preferredCoursesWithBlocks.add(c);
+                }
+            }
+        }
+
+        ArrayList<Block> blocks = new ArrayList<Block>();
+
+        for (Course c : preferredCoursesWithBlocks) {
+            if (!blocks.contains(c.getBlock())) {
+                blocks.add(c.getBlock());
+            }
+        }
+
+        return blocks.size();// * this.getGpa();
+    }
+
+    public void printSchedule(ArrayList<Course> courses) {
+        System.out.print(getName() + ": ");
+        for (Course c : courses) {
+            for (Course pc : this.getPreferredCourses()) {
+                if (c.getName().equals(pc.getName())) {
+                    System.out.print(c.getName() + "  " + c.getBlock() + "  ");
+                }
+            }
+        }
+        System.out.println("");
+    }
 }
